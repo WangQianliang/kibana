@@ -19,9 +19,14 @@
   margin-right: $euiSizeS;
 }
 
-.codeDiffDeletion {
-  margin: 0 $euiSizeS;
-  background-color: $euiColorVis0;
+.codeDiff__badgeGroup {
+  margin-right: $euiSizeM;
+}
+
+.codeDiff__badge {
+  width: $euiSizeXXL;
+  text-align: center;
+  color: $euiColorLightestShade;
 }
 
 .codeDiff__panel {
@@ -31,7 +36,13 @@
 .codeDiff__header {
   border-bottom: $euiBorderThin solid $euiColorLightShade;
   height: $euiSizeXXL;
-  padding: $euiSize;
+  padding: $euiSize $euiSizeS;
+}
+
+.codeDiff__filePath {
+  @include euiCodeFont;
+  font-size: $euiFontSizeS;
+  text-decoration: underline;
 }
 
 .codeAccordionCollapse__icon {
@@ -45,4 +56,10 @@
 
 .codeAccordion {
   margin-bottom: $euiSizeM;
+}
+
+// Monaco Overrides
+
+.monaco-diff-editor.side-by-side .editor.modified {
+  box-shadow: none !important;
 }

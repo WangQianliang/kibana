@@ -4,14 +4,7 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
-import {
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiIcon,
-  EuiText,
-  EuiBadge,
-  EuiNotificationBadge,
-} from '@elastic/eui';
+import { EuiFlexGroup, EuiFlexItem, EuiIcon, EuiSpacer, EuiText, EuiBadge } from '@elastic/eui';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
@@ -56,28 +49,22 @@ const Difference = (props: {
       >
         <EuiFlexItem>
           <EuiFlexGroup gutterSize="none" alignItems="center">
-            <EuiFlexItem grow={false}>
+            <EuiFlexItem grow={false} className="codeDiff__badgeGroup">
               <EuiFlexGroup gutterSize="none">
-                <EuiNotificationBadge size="m">{props.fileDiff.additions}</EuiNotificationBadge>
-                <EuiNotificationBadge className="codeDiffDeletion" size="m">
+                <EuiBadge className="codeDiff__badge" color="secondary">
+                  {props.fileDiff.additions}
+                </EuiBadge>
+                <EuiBadge className="codeDiff__badge" color="danger">
                   {props.fileDiff.deletions}
-                </EuiNotificationBadge>
+                </EuiBadge>
               </EuiFlexGroup>
             </EuiFlexItem>
-            <EuiFlexItem>{props.fileDiff.path}</EuiFlexItem>
-          </EuiFlexGroup>
-        </EuiFlexItem>
-        <EuiFlexItem grow={false}>
-          <div
-            className="euiButton euiButton--primary euiButton--small codeViewFile__button"
-            role="button"
-          >
-            <span className="euiButton__content">
+            <EuiFlexItem className="codeDiff__filePath">
               <Link to={`/${props.repoUri}/blob/${props.revision}/${props.fileDiff.path}`}>
-                View File
+                {props.fileDiff.path}
               </Link>
-            </span>
-          </div>
+            </EuiFlexItem>
+          </EuiFlexGroup>
         </EuiFlexItem>
       </EuiFlexGroup>
     }
@@ -134,6 +121,7 @@ export class DiffPage extends React.Component<Props> {
         <div className="codeDiffCommitMessage">
           <EuiText size="s">{commit.commit.message}</EuiText>
         </div>
+        <EuiSpacer size="m" />
         <EuiFlexGroup gutterSize="none" justifyContent="spaceBetween" className="codeDiffMetadata">
           <EuiFlexItem grow={false}>
             <EuiText size="s">
